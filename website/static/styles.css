@@ -1,0 +1,9 @@
+.add_hover
+{
+    color: #fff;
+}
+.add_hover:hover
+{
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+}

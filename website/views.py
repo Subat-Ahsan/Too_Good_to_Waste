@@ -61,7 +61,10 @@ def inventory_view():
 
 @views.route("map", methods=['GET'])
 def map():
-    return render_template("map.html")
+    addresses = []
+    for bank in db.session.query(Store).filter_by(type="T").all():
+        addresses.append(bank.address)
+    return render_template("map.html", addresses=addresses)
 
 @views.route("store-info/<storeId>", methods=['GET'])
 def store_info(storeId):

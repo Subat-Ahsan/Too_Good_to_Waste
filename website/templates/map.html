@@ -12,36 +12,38 @@
     #map{
         width: 600px;
         height: 600px;
+        margin: auto;
     }
 </style>
 
 {% endblock %}
 
 {% block content%}
-<p>test</p>
 <div id = "map"></div>
 <script>
-    const map = L.map('map')
-    var addresses = [
-    "1600 Amphitheatre Parkway, Mountain View, CA",
-    "1 Infinite Loop, Cupertino, CA",
-    "1600 Pennsylvania Ave NW, Washington, DC"
-    ];
-    map.setView([37.7749, -122.4194], 5);
+    const map = L.map('map').setView([37.7749, -122.4194], 5);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+    var geocoder = L.Control.Geocoder.nominatim();
     
-    addresses.forEach(function(address) {
-        L.Control.geocoder({
-            defaultMarkGeocode: false
-        })
-        .on('markgeocode', function(e) {
-            var latlng = e.geocode.center;
-            L.marker(latlng).addTo(map);
-        })
-        .geocode(address);
-    });
+    {% for address in addresses %}
+    console.log("{{ address }}")
+        var jsaddress = "{{ address }}"
+        console.log(jsaddress)
+        geocoder.geocode(jsaddress, function(results) {
+            var result = results[0];
+            console.log(result)
+            if(result) {
+                var latlng = result.center;
+                L.marker(latlng).addTo(map)
+                    .bindPopup(result.name)
+                    .openPopup();
+            }
+        });
+
+    {% endfor %}
 </script>
 {% endblock %}
