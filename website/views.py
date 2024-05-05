@@ -59,6 +59,10 @@ def bank_view():
 def inventory_view():
     return render_template("inventory_view.html", items=appData["items"])
 
+@views.route("map", methods=['GET'])
+def map():
+    return render_template("map.html")
+
 @views.route("store-info/<storeId>", methods=['GET'])
 def store_info(storeId):
     store = db.session.query(Store).filter_by(id=storeId).first()
