@@ -1,0 +1,47 @@
+{% extends "base.html" %} 
+
+{% block title %}Input Data{% endblock %} 
+
+{%block leaflet %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+
+<style>
+    #map{
+        width: 600px;
+        height: 600px;
+    }
+</style>
+
+{% endblock %}
+
+{% block content%}
+<p>test</p>
+<div id = "map"></div>
+<script>
+    const map = L.map('map')
+    var addresses = [
+    "1600 Amphitheatre Parkway, Mountain View, CA",
+    "1 Infinite Loop, Cupertino, CA",
+    "1600 Pennsylvania Ave NW, Washington, DC"
+    ];
+    map.setView([37.7749, -122.4194], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
+    addresses.forEach(function(address) {
+        L.Control.geocoder({
+            defaultMarkGeocode: false
+        })
+        .on('markgeocode', function(e) {
+            var latlng = e.geocode.center;
+            L.marker(latlng).addTo(map);
+        })
+        .geocode(address);
+    });
+</script>
+{% endblock %}
