@@ -29,17 +29,17 @@
 
     var geocoder = L.Control.Geocoder.nominatim();
     
-    {% for address in addresses %}
-    console.log("{{ address }}")
-        var jsaddress = "{{ address }}"
-        console.log(jsaddress)
+    {% for bank in banks %}
+    console.log("{{ bank.address }}")
+        var jsaddress = "{{ bank.address }}"
+        //console.log(jsaddress)
         geocoder.geocode(jsaddress, function(results) {
             var result = results[0];
-            console.log(result)
+            //console.log(result)
             if(result) {
                 var latlng = result.center;
                 L.marker(latlng).addTo(map)
-                    .bindPopup(result.name)
+                    .bindPopup("<h3><a href='/store-info/{{bank.id}}'> {{bank.name}} </a></h3>")
                     .openPopup();
             }
         });
