@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Input Data{% endblock %} 
+{% block content%}
+<div style="margin-right: 250px; margin-left: 250px; margin-top: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;"
+>
+<h1 >{{store.name}}</h1>
+<label>Address: {{store.address}}</label>
+<table style = "border-collapse: separate;">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Date Made</th>
+            <th>Expiry date</th>
+        </tr>
+        <tbody>
+            {% for item in store.items %}
+            <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.date_made }}</td>
+            <td>{{ item.date_expire }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </thead>
+</div>
+
+{% endblock %}
