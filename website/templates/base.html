@@ -11,20 +11,34 @@
     <link rel="stylesheet" href="../static/styles.css">
     <!-- Custom CSS -->
     <style>
-        /* Add your custom CSS styles here */
+        th, td {
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 25px;
+            border: 1px solid black;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 2px solid black;
+        }
+        
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <span class="navbar-brand" style = "font-size: 36px; font-family:Roboto Bold; font-weight: bold; color: #ffc400;">Too Good 2 Waste</span>
+        <div class="navbar-nav ml-auto">
         <a class="navbar-brand" href="/">Home</a>
-        <a class="navbar-brand" href="/input-data">Item Input</a>
-        <a class="navbar-brand" href="/store-input">Store Input</a>
+        <a class="navbar-brand" href="/input-data">Register Items</a>
+        <a class="navbar-brand" href="/store-input">Create Store</a>
+        <a class="navbar-brand" href="/bank-input">Create Food Bank</a>
         <a class="navbar-brand" href="/store-view">View Stores</a>
-        <a class="navbar-brand" href="/bank-input">Food Bank Input</a>
         <a class="navbar-brand" href="/bank-view">View Food Banks</a>
-        <a class="navbar-brand" href="/inventory">Inventory</a>
+        <a class="navbar-brand" href="/inventory">View Inventory</a>
         <a class="navbar-brand" href="/map">Map</a>
-        
+        </div>
     </nav>
     <div>
     {% block content %}
