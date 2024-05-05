@@ -30,19 +30,38 @@
     var geocoder = L.Control.Geocoder.nominatim();
     
     {% for bank in banks %}
-    console.log("{{ bank.address }}")
-        var jsaddress = "{{ bank.address }}"
+    console.log("{{ bank[0].address }}")
+        var jsaddress = "{{ bank[0].address }}"
         //console.log(jsaddress)
+        var myCustomIcon = L.icon({
+        iconUrl: 'https://cdn.discordapp.com/attachments/1150144609087922276/1236736009404682261/map-marker-icon-342x512-gd1hf1rz.png?ex=663917aa&is=6637c62a&hm=2648a05ae77aad44a82da7d034f74366946475852c701f34e4a4ba674e9cd2e0&', 
+            iconSize: [24, 40],  
+            iconAnchor: [12, 40]                
+        });
+        {% if bank[1] == True %}
         geocoder.geocode(jsaddress, function(results) {
             var result = results[0];
             //console.log(result)
             if(result) {
                 var latlng = result.center;
                 L.marker(latlng).addTo(map)
-                    .bindPopup("<h3><a href='/store-info/{{bank.id}}'> {{bank.name}} </a></h3>")
+                    .bindPopup("<h5><a href='/store-info/{{bank[0].id}}'> {{bank[0].name}} </a></h5>")
                     .openPopup();
             }
         });
+        {% else %}
+        geocoder.geocode(jsaddress, function(results) {
+            var result = results[0];
+            //console.log(result)
+            if(result) {
+                var latlng = result.center;
+                L.marker(latlng, {icon: myCustomIcon}).addTo(map)
+                    .bindPopup("<h5><a href='/store-info/{{bank[0].id}}'> {{bank[0].name}} </a></h5>")
+                    .openPopup();
+            }
+        });
+
+        {% endif %}
 
     {% endfor %}
 </script>

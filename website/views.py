@@ -10,7 +10,7 @@ views = Blueprint("views",__name__)
 
 @views.route("/")
 def home():
-    return render_template("base.html")
+    return render_template("home.html")
 
 @views.route("input-data", methods=['GET', 'POST'])
 def input_data():
@@ -61,8 +61,12 @@ def inventory_view():
 
 @views.route("map", methods=['GET'])
 def map():
-    
-    banks = db.session.query(Store).filter_by(type="T").all()
+    banks  = []
+    for i in  db.session.query(Store).filter_by(type="T").all():
+        banks.append( (i, True))
+
+    for i in  db.session.query(Store).filter_by(type="S").all():
+        banks.append((i, False))
         
     return render_template("map.html", banks=banks)
 
