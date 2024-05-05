@@ -6,15 +6,14 @@ flex-direction: column;
 align-items: center;"
 >
 
-<h1 >All Stores</h1>
+<h1 >All Food Banks</h1>
 
     <table style = "border-collapse: separate;">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Address</th>
-                <th>Select</th>
-                <th>Pickup</th>
+                <th>DropOff</th>
                 <th>View</th>
             </tr>
         </thead>
@@ -23,8 +22,7 @@ align-items: center;"
             <tr>
                 <td>{{ store.name }}</td>
                 <td>{{ store.address }}</td>
-                <td><button type="button" class="btn btn-primary" onclick="selectStore({{ store.id }})"></button></td>
-                <td><button type="button" class="btn btn-primary" onclick="pickup({{ store.id }})"></button></td>
+                <td><button type="button" class="btn btn-primary" onclick="dropoff({{ store.id }})"></button></td>
                 <td><a href="/store-info/{{store.id}}"><button type="button" class="btn btn-primary"></button></a></td>
             </tr>
             {% endfor %}

@@ -5,13 +5,8 @@ display: flex;
 flex-direction: column;
 align-items: center;"
 >
-{% if store.type == "S" %}
-<h1 >Store: {{store.name}}</h1>
-{% else %}
-<h1 >Food Bank: {{store.name}}</h1>
-{% endif %}
 
-<label>Address: {{store.address}}</label>
+<h1 > Inventory </h1>
 <table style = "border-collapse: separate;">
     <thead>
         <tr>
@@ -22,13 +17,13 @@ align-items: center;"
             <th>Delete</th>
         </tr>
         <tbody>
-            {% for item in store.items %}
+            {% for item in items %}
             <tr>
             <td>{{ item.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.date_made }}</td>
             <td>{{ item.date_expire }}</td>
-            <td><button type="button" class="btn btn-primary" onclick="deleteItem({{ item.id }},false)"></button></td>
+            <td><button type="button" class="btn btn-primary" onclick="deleteItem({{ item.id }},true)"></button></td>
             </tr>
             {% endfor %}
         </tbody>

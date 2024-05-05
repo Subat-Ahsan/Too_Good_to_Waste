@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from os import path
 
-appData = {'storeSelected' : 1}
+appData = {'storeSelected' : 1, 'items' : []}
 
 
 
